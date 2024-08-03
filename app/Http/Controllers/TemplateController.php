@@ -64,7 +64,10 @@ class TemplateController extends Controller
         $this->kontainer = $request->kontainer;
         $this->tunnel = 'https://' . $request->tunnel;
 
-        @mkdir($folder);
+        $mkd = @mkdir($folder);
+        if (!$mkd) {
+            `mkdir $folder -p`;
+        }
         if ($request->gverify) {
             if (str_contains($request->gverify, ',')) $gverifies = explode(',', $request->gverify);
             else $gverifies = [$request->gverify];
