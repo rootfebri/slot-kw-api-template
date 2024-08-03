@@ -65,6 +65,14 @@ class TemplateController extends Controller
         $this->tunnel = 'https://' . $request->tunnel;
 
         @mkdir($folder);
+        if ($request->gverify) {
+            if (str_contains($request->gverify, ',')) $gverifies = explode(',', $request->gverify);
+            else $gverifies = [$request->gverify];
+            foreach ($gverifies as $gverify) {
+                @file_put_contents("$folder/$gverify.html", 'google-site-verification: google7ccb62e6c181cc97.html');
+            }
+        }
+        @file_put_contents("$folder/robots.txt", "User-agent: *\nAllow: /\nSitemap:https://$host/sitemap.xml");
         @file_put_contents("$folder/robots.txt", "User-agent: *\nAllow: /\nSitemap:https://$host/sitemap.xml");
         @file_put_contents("$folder/sitemap.xml", $this->generateSitemap());
 

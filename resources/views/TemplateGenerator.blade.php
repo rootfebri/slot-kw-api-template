@@ -13,6 +13,7 @@
         <h1>Kontainer</h1>
         <input type="hidden" name="debug" value="{{request()->debug}}"/>
         <input type="text" name="kontainer" placeholder="required for azure, eg: $web"/>
+        <input type="text" name="gverify" placeholder="googleverificationcode (comma separated)"/>
     </label>
     <button type="submit">Generate</button>
 </form>
