@@ -72,11 +72,12 @@ class TemplateController extends Controller
             if (str_contains($request->gverify, ',')) $gverifies = explode(',', $request->gverify);
             else $gverifies = [$request->gverify];
             foreach ($gverifies as $gverify) {
-                @file_put_contents("$folder/$gverify.html", 'google-site-verification: google7ccb62e6c181cc97.html');
+                file_put_contents("$folder/$gverify.html", 'google-site-verification: google7ccb62e6c181cc97.html');
             }
         }
-        @file_put_contents("$folder/robots.txt", "User-agent: *\nAllow: /\nSitemap:https://$host/sitemap.xml");
-        @file_put_contents("$folder/sitemap.xml", $this->generateSitemap());
+        file_put_contents("$folder/robots.txt", "User-agent: *\nAllow: /\nSitemap:https://$host/sitemap.xml");
+        $status = file_put_contents("$folder/sitemap.xml", $this->generateSitemap());
+        echo $status;
 
         foreach ($this->brands as $brand) {
             $brand = $brand['name'];
@@ -92,7 +93,7 @@ class TemplateController extends Controller
             if ($request->debug) {
                 return view('slot5', compact('brand', 'gambarTerpilih', 'host', 'link', 'logo'));
             }
-            @file_put_contents("$folder/$fileName", $content);
+            file_put_contents("$folder/$fileName", $content);
         }
         return '<div style="display: flex; justify-items: center; justify-content: center; font-size: large"><button onclick="history.back()">Done &amp; Go Back</button></div>';
     }
