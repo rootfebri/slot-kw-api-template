@@ -76,8 +76,8 @@ class TemplateController extends Controller
             }
         }
         file_put_contents("$folder/robots.txt", "User-agent: *\nAllow: /\nSitemap:https://$host/sitemap.xml");
-        $status = file_put_contents("$folder/sitemap.xml", $this->generateSitemap());
-        echo $status;
+        $sitemap = file_put_contents("$folder/sitemap.xml", $this->generateSitemap());
+        echo $sitemap;
 
         foreach ($this->brands as $brand) {
             $brand = $brand['name'];
