@@ -73,7 +73,6 @@ class TemplateController extends Controller
             }
         }
         @file_put_contents("$folder/robots.txt", "User-agent: *\nAllow: /\nSitemap:https://$host/sitemap.xml");
-        @file_put_contents("$folder/robots.txt", "User-agent: *\nAllow: /\nSitemap:https://$host/sitemap.xml");
         @file_put_contents("$folder/sitemap.xml", $this->generateSitemap());
 
         foreach ($this->brands as $brand) {
