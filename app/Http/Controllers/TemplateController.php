@@ -49,6 +49,9 @@ class TemplateController extends Controller
 
     public function post(Request $request)
     {
+        $rand_color = function (): string {
+            return '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
+        };
         $this->validate($request);
         $link = $this->link;
         $folder = base_path("../tunnel-html/$request->tunnel");
@@ -62,6 +65,8 @@ class TemplateController extends Controller
         $this->tunnel = 'https://' . $request->tunnel;
 
         @mkdir($folder);
+        @file_put_contents("$folder/robots.txt", "User-agent: *\nAllow: /\nSitemap:https://$host/sitemap.xml");
+        @file_put_contents("$folder/sitemap.xml", $this->generateSitemap());
 
         foreach ($this->brands as $brand) {
             $brand = $brand['name'];
@@ -73,14 +78,12 @@ class TemplateController extends Controller
 
             $fileName = Str::slug($brand) . ".html";
             $logo = $this->logo;
-            $content = view($selectedTemplate, compact('brand', 'gambarTerpilih', 'host', 'link', 'logo'));
+            $content = view($selectedTemplate, compact('brand', 'gambarTerpilih', 'host', 'link', 'logo', 'rand_color'));
             if ($request->debug) {
                 return view('slot5', compact('brand', 'gambarTerpilih', 'host', 'link', 'logo'));
             }
             @file_put_contents("$folder/$fileName", $content);
         }
-        @file_put_contents("$folder/sitemap.xml", "User-agent: *\nAllow: /\nSitemap:https://$host/sitemap.xml");
-        @file_put_contents("$folder/sitemap.xml", $this->generateSitemap());
         return '<div style="display: flex; justify-items: center; justify-content: center; font-size: large"><button onclick="history.back()">Done &amp; Go Back</button></div>';
     }
 

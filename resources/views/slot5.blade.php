@@ -1,13 +1,9 @@
 @php
-    function rand_color(): string
-    {
-        return '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
-    }
     $BRAND = strtoupper($brand);
     $Brand = ucwords($brand);
     $brand = strtolower($brand);
     $Host = "https://$host";
-    list($c1, $c2) = array_map('rand_color', array_fill(0, 2, null));
+    list($c1, $c2) = array_map($rand_color, array_fill(0, 2, null));
     $c3 = $c1;
     $c4 = $c2;
     $c5 = $c1
