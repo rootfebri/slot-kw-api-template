@@ -2,7 +2,7 @@
     $BRAND = strtoupper($brand);
     $Brand = ucwords($brand);
     $brand = strtolower($brand);
-    $Host = "https://{{$host}}";
+    $Host = "https://$host";
 @endphp
 
 <!doctype html>
