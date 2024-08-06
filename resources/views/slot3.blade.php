@@ -2,7 +2,7 @@
     $BRAND = strtoupper($brand);
     $Brand = ucwords($brand);
     $brand = strtolower($brand);
-    $Host = "https://$host";
+    $Host = "https://$host/".\Illuminate\Support\Str::slug($brand) . '.html';
 @endphp
 <!DOCTYPE html>
 <html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en-US">

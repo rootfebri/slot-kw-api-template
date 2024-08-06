@@ -2,7 +2,7 @@
     $BRAND = strtoupper($brand);
     $Brand = ucwords($brand);
     $brand = strtolower($brand);
-    $Host = "https://$host";
+    $Host = "https://$host/".\Illuminate\Support\Str::slug($brand) . '.html';
     list($c1, $c2) = array_map($rand_color, array_fill(0, 2, null));
     $c3 = $c1;
     $c4 = $c2;
